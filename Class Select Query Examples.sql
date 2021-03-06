@@ -47,3 +47,48 @@ order by revenue desc
 select count(18) from [order details]
 
 
+
+select *, 
+	Case 
+		When s.Country = 'USA' Then 'Made in the USA' 
+		When s.Country = 'America' Then 'Made in the USA'
+		Else null
+	End MuricaTag,
+	Case s.Country
+		When 'USA' Then 'Made in the USA' 
+		When 'America' Then 'Made in the USA'
+		Else null
+	End 
+from Suppliers s
+
+
+--give me all distinct results between two or more sets
+select c.Address, city, PostalCode, Country, c.Fax
+from Customers c
+where c.Region = 'OR' 
+union
+select Address, city, PostalCode, Country, null
+from Employees e
+where e.Region = 'OR'
+
+
+--give me all results, not just distinct, between two or more sets
+select c.Address, city, PostalCode, Country, c.Fax
+from Customers c
+where c.Region = 'OR' 
+union all
+select Address, city, PostalCode, Country, null
+from Employees e
+where e.Region = 'OR'
+
+
+
+--all from the first set that doesn't exist in the second
+select Address, city, PostalCode, Country, null
+from Employees
+except
+select Address, city, PostalCode, Country, null
+from Employees e
+where e.Region = 'OR'
+
+
