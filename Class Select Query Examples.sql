@@ -92,3 +92,10 @@ from Employees e
 where e.Region = 'OR'
 
 
+
+--self join 
+select e.FirstName, bosses.FirstName 
+from Employees e
+	join Employees bosses
+		on bosses.EmployeeID = e.ReportsTo
+
